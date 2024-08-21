@@ -25,6 +25,7 @@ addList.addEventListener("click", () => {
     tasks.push(newTask);
     console.log(tasks)
     renderList()
+    taskValue.value=""
   }
 
 });
