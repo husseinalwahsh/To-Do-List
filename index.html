@@ -1,35 +1,29 @@
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-DO list</title>
     <link rel="stylesheet" href="style.css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="countuner">
-        <h2>To-DO List</h2>
-        <div class="list">
-
-
-            <div class="addTolist">
-                <input type=" text" id="taskValue" />
-                <select id="priority">
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
-                </select>
-                <button id="addList">Add</button>
-            </div>
-            <ul id="ul">
-               
-            </ul>
+      <h2>To-DO List</h2>
+      <div class="list">
+        <div class="addTolist">
+          <input type=" text" id="taskName" />
+          <select id="priority">
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+          <button id="addList">Add</button>
         </div>
+        <ul id="tasksList"></ul>
+      </div>
     </div>
 
     <script src="app.js"></script>
-</body>
-
+  </body>
 </html>
