@@ -1,5 +1,1 @@
 node_modules
-.prettierrc.json
-eslint.config.mjs
-package-lock.json
-package.json
