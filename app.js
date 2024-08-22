@@ -1,16 +1,16 @@
 class TaskItem {
   #taskName;
-  #taskStatus;
+  #taskPriority;
 
-  constructor(taskName, taskStatus) {
+  constructor(taskName, taskPriority) {
     this.#taskName = taskName;
-    this.#taskStatus = taskStatus;
+    this.#taskPriority = taskPriority;
   }
   getNameTask() {
     return this.#taskName;
   }
   getTaskStatus() {
-    return this.#taskStatus;
+    return this.#taskPriority;
   }
 }
 
@@ -18,8 +18,8 @@ class ToDoList {
   constructor() {
     this.tasks = [];
   }
-  addTask(taskName, taskStatus) {
-    const newTask = new TaskItem(taskName, taskStatus);
+  addTask(taskName, taskPriority) {
+    const newTask = new TaskItem(taskName, taskPriority);
     this.tasks.push(newTask);
     console.log(this.tasks);
     this.renderList();
@@ -27,6 +27,7 @@ class ToDoList {
     this.setTaskPriority();
   }
   renderList() {
+    const tasksListElement = document.getElementById("tasksList");
     tasksListElement.innerHTML = "";
     for (let i = 0; i < this.tasks.length; i++) {
       const todoItemElement = document.createElement("li");
@@ -42,7 +43,6 @@ class ToDoList {
       taskNameItem.textContent = `${this.tasks[i].getNameTask()}`;
       tasksListElement.appendChild(todoItemElement);
     }
-    console.log(tasksListElement);
   }
   deleteTask(index) {
     this.tasks.splice(index, 1);
@@ -52,11 +52,11 @@ class ToDoList {
     for (let i = 0; i < this.tasks.length; i++) {
       const todoItemElement = document.querySelectorAll("li")[i];
       if (this.tasks[i].getTaskStatus() === "high") {
-        todoItemElement.style.background = "rgba(255, 0, 0, 0.493)";
+        todoItemElement.classList.add("high");
       } else if (this.tasks[i].getTaskStatus() === "medium") {
-        todoItemElement.style.background = "rgba(246, 255, 0, 0.795)";
+        todoItemElement.classList.add("medium");
       } else {
-        todoItemElement.style.background = "rgba(30, 255, 0, 0.537)";
+        todoItemElement.classList.add("low");
       }
     }
   }
@@ -67,12 +67,12 @@ const addListElement = document.getElementById("addList");
 const taskNameElement = document.getElementById("taskName");
 const taskPriorityElement = document.getElementById("priority");
 const toDoList = new ToDoList();
-const tasksListElement = document.getElementById("tasksList");
+
 addListElement.onclick = () => {
   const taskName = taskNameElement.value;
-  const taskStatus = taskPriorityElement.value;
+  const taskPriority = taskPriorityElement.value;
   if (taskName !== "") {
-    toDoList.addTask(taskName, taskStatus);
+    toDoList.addTask(taskName, taskPriority);
   } else {
     alert("Please enter a task name.");
   }
