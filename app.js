@@ -9,31 +9,42 @@ class taskItem {
   }
 }
 
+class toDoList {
+  constructor() {
+    this.tasks = [];
+  }
+  addTask(taskName) {
+    const newTask = new taskItem(taskName);
+    this.tasks.push(newTask);
+    console.log(this.tasks);
+    this.renderList();
+    taskNameElement.value = "";
+  }
+  renderList() {
+    tasksListElement.innerHTML = "";
+    for (let i = 0; i < this.tasks.length; i++) {
+      const todoItemElement = document.createElement("li");
+      const taskNameItem = document.createElement("p");
+      todoItemElement.appendChild(taskNameItem);
+      taskNameItem.textContent = `${this.tasks[i].getNameTask()}`;
+      tasksListElement.appendChild(todoItemElement);
+    }
+    console.log(tasksListElement);
+  }
+}
+
 //Vareble in this code
 const addListElement = document.getElementById("addList");
 const taskNameElement = document.getElementById("taskName");
 const taskPriorityElement = document.getElementById("priority");
-const tasks = [];
+const newToDoList = new toDoList();
 const tasksListElement = document.getElementById("tasksList");
 
-addListElement.addEventListener("click", () => {
-  if (taskNameElement.value !== "") {
-    let newTask = new taskItem(taskNameElement.value);
-    tasks.push(newTask);
-    console.log(tasks);
-    renderList();
-    taskNameElement.value = "";
+addListElement.onclick = () => {
+  const taskName = taskNameElement.value;
+  if (taskName !== "") {
+    newToDoList.addTask(taskName);
+  } else {
+    alert("Please enter a task name.");
   }
-});
-
-const renderList = () => {
-  tasksListElement.innerHTML = "";
-  for (let i = 0; i < tasks.length; i++) {
-    const todoItemElement = document.createElement("li");
-    const taskNameItem = document.createElement("p");
-    todoItemElement.appendChild(taskNameItem);
-    taskNameItem.textContent = `${tasks[i].getNameTask()}`;
-    tasksListElement.appendChild(todoItemElement);
-  }
-  console.log(tasksListElement);
 };
