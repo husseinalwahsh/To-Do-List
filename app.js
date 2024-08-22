@@ -1,4 +1,4 @@
-class taskItem {
+class TaskItem {
   #taskName;
 
   constructor(taskName) {
@@ -9,12 +9,12 @@ class taskItem {
   }
 }
 
-class toDoList {
+class ToDoList {
   constructor() {
     this.tasks = [];
   }
   addTask(taskName) {
-    const newTask = new taskItem(taskName);
+    const newTask = new TaskItem(taskName);
     this.tasks.push(newTask);
     console.log(this.tasks);
     this.renderList();
@@ -37,13 +37,13 @@ class toDoList {
 const addListElement = document.getElementById("addList");
 const taskNameElement = document.getElementById("taskName");
 const taskPriorityElement = document.getElementById("priority");
-const newToDoList = new toDoList();
+const toDoList = new ToDoList();
 const tasksListElement = document.getElementById("tasksList");
 
 addListElement.onclick = () => {
   const taskName = taskNameElement.value;
   if (taskName !== "") {
-    newToDoList.addTask(taskName);
+    toDoList.addTask(taskName);
   } else {
     alert("Please enter a task name.");
   }
