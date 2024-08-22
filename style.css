@@ -126,5 +126,4 @@ select#priority:hover {
 select#priority:focus {
   box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
   border-color: #007bff;
-  background-color: rgba(246, 255, 0, 0.795);
 }
