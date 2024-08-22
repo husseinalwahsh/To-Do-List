@@ -1,6 +1,6 @@
 class TaskItem {
   #taskName;
- 
+
   constructor(taskName) {
     this.#taskName = taskName;
   }
@@ -26,11 +26,11 @@ class ToDoList {
       const todoItemElement = document.createElement("li");
       const taskNameItem = document.createElement("p");
       const deleteTaskButton = document.createElement("button");
-      deleteTaskButton.id="delete"
+      deleteTaskButton.id = "delete";
       deleteTaskButton.textContent = "Delete";
-      deleteTaskButton.onclick= () =>{
-       this.deleteTask(i)
-      }
+      deleteTaskButton.onclick = () => {
+        this.deleteTask(i);
+      };
       todoItemElement.appendChild(taskNameItem);
       todoItemElement.appendChild(deleteTaskButton);
       taskNameItem.textContent = `${this.tasks[i].getNameTask()}`;
@@ -38,11 +38,10 @@ class ToDoList {
     }
     console.log(tasksListElement);
   }
-  deleteTask(index){
-    this.tasks.splice(index,1)
-    this.renderList()
+  deleteTask(index) {
+    this.tasks.splice(index, 1);
+    this.renderList();
   }
-
 }
 
 //Vareble in this code
@@ -59,4 +58,3 @@ addListElement.onclick = () => {
     alert("Please enter a task name.");
   }
 };
-
