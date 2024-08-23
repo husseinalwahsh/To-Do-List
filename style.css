@@ -135,5 +135,37 @@ select#priority:focus {
 }
 
 .low {
-  background-color: rgba(30, 255, 0, 0.537);
+  background-color: rgba(25, 0, 255, 0.463);
+}
+input[type="checkbox"] {
+  appearance: none;
+  /* -webkit-appearance: none;
+  -moz-appearance: none; */
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #888;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Style for checked checkbox */
+input[type="checkbox"]:checked {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+/* Custom checkmark */
+input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 8px;
+  height: 16px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
 }
