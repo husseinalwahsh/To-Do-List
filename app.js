@@ -1,16 +1,23 @@
 class TaskItem {
   #taskName;
   #taskPriority;
-
+  #isTasksComplete;
   constructor(taskName, taskPriority) {
     this.#taskName = taskName;
     this.#taskPriority = taskPriority;
+    this.#isTasksComplete = false;
   }
   getNameTask() {
     return this.#taskName;
   }
   getTaskStatus() {
     return this.#taskPriority;
+  }
+  getIsTasksComplete() {
+    return this.#isTasksComplete;
+  }
+  setIsTasksComplete() {
+    return true;
   }
 }
 
@@ -33,15 +40,31 @@ class ToDoList {
       const todoItemElement = document.createElement("li");
       const taskNameItem = document.createElement("p");
       const deleteTaskButton = document.createElement("button");
+      const checkboxElement = document.createElement("input");
+      checkboxElement.type = "checkbox";
       deleteTaskButton.id = "delete";
       deleteTaskButton.textContent = "Delete";
       deleteTaskButton.onclick = () => {
         this.deleteTask(i);
       };
       todoItemElement.appendChild(taskNameItem);
+      todoItemElement.appendChild(checkboxElement);
       todoItemElement.appendChild(deleteTaskButton);
       taskNameItem.textContent = `${this.tasks[i].getNameTask()}`;
+      checkboxElement.value = this.tasks[i].getIsTasksComplete();
       tasksListElement.appendChild(todoItemElement);
+      checkboxElement.addEventListener("change", () => {
+        const todoItemElement = document.querySelectorAll("li")[i];
+        //  todoItemElement.style.textDecoration="underline";
+        if (checkboxElement.value === "false") {
+          checkboxElement.value = this.tasks[i].setIsTasksComplete();
+          todoItemElement.style.background = "rgb(30, 255, 0)";
+        } else {
+          console.log(true);
+          checkboxElement.value = this.tasks[i].getIsTasksComplete();
+          todoItemElement.style.background = "";
+        }
+      });
     }
   }
   deleteTask(index) {
