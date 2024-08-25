@@ -10,7 +10,7 @@ class TaskItem {
   getNameTask() {
     return this.#taskName;
   }
-  getTaskStatus() {
+  getTaskPriority() {
     return this.#taskPriority;
   }
   getIsTasksComplete() {
@@ -74,9 +74,9 @@ class ToDoList {
   setTaskPriority() {
     for (let i = 0; i < this.tasks.length; i++) {
       const todoItemElement = document.querySelectorAll("li")[i];
-      if (this.tasks[i].getTaskStatus() === "high") {
+      if (this.tasks[i].getTaskPriority() === "high") {
         todoItemElement.classList.add("high");
-      } else if (this.tasks[i].getTaskStatus() === "medium") {
+      } else if (this.tasks[i].getTaskPriority() === "medium") {
         todoItemElement.classList.add("medium");
       } else {
         todoItemElement.classList.add("low");
