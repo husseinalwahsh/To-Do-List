@@ -54,17 +54,12 @@ class ToDoList {
           todoItemElement.classList.remove("complete");
         }
       });
+      todoItemElement.classList.add(this.tasks[i].getTaskStatus());
     }
   }
   deleteTask(index) {
     this.tasks.splice(index, 1);
     this.renderList();
-  }
-  setTaskPriority() {
-    for (let i = 0; i < this.tasks.length; i++) {
-      const todoItemElement = document.querySelectorAll("li")[i];
-      todoItemElement.classList.add(this.tasks[i].getTaskStatus());
-    }
   }
 }
 
