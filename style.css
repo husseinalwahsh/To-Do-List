@@ -135,5 +135,8 @@ select#priority:focus {
 }
 
 .low {
-  background-color: rgba(30, 255, 0, 0.537);
+  background-color: rgba(127, 230, 113, 0.264);
+}
+.complete{
+background-color: rgb(30, 255, 0);
 }

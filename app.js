@@ -1,23 +1,15 @@
 class TaskItem {
   #taskName;
   #taskPriority;
-  #isTasksComplete;
   constructor(taskName, taskPriority) {
     this.#taskName = taskName;
     this.#taskPriority = taskPriority;
-    this.#isTasksComplete = false;
   }
   getNameTask() {
     return this.#taskName;
   }
   getTaskStatus() {
     return this.#taskPriority;
-  }
-  getIsTasksComplete() {
-    return this.#isTasksComplete;
-  }
-  setIsTasksComplete() {
-    return true;
   }
 }
 
@@ -51,18 +43,15 @@ class ToDoList {
       todoItemElement.appendChild(checkboxElement);
       todoItemElement.appendChild(deleteTaskButton);
       taskNameItem.textContent = `${this.tasks[i].getNameTask()}`;
-      checkboxElement.value = this.tasks[i].getIsTasksComplete();
+
       tasksListElement.appendChild(todoItemElement);
-      checkboxElement.addEventListener("change", () => {
+      checkboxElement.addEventListener("change", (event) => {
         const todoItemElement = document.querySelectorAll("li")[i];
         //  todoItemElement.style.textDecoration="underline";
-        if (checkboxElement.value === "false") {
-          checkboxElement.value = this.tasks[i].setIsTasksComplete();
-          todoItemElement.style.background = "rgb(30, 255, 0)";
+        if (event.target.checked) {
+          todoItemElement.classList.add("complete");
         } else {
-          console.log(true);
-          checkboxElement.value = this.tasks[i].getIsTasksComplete();
-          todoItemElement.style.background = "";
+          todoItemElement.classList.remove("complete");
         }
       });
     }
@@ -74,13 +63,7 @@ class ToDoList {
   setTaskPriority() {
     for (let i = 0; i < this.tasks.length; i++) {
       const todoItemElement = document.querySelectorAll("li")[i];
-      if (this.tasks[i].getTaskStatus() === "high") {
-        todoItemElement.classList.add("high");
-      } else if (this.tasks[i].getTaskStatus() === "medium") {
-        todoItemElement.classList.add("medium");
-      } else {
-        todoItemElement.classList.add("low");
-      }
+      todoItemElement.classList.add(this.tasks[i].getTaskStatus());
     }
   }
 }
