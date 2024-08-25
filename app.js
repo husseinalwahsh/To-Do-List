@@ -8,7 +8,7 @@ class TaskItem {
   getNameTask() {
     return this.#taskName;
   }
-  getTaskStatus() {
+  getTaskPriority() {
     return this.#taskPriority;
   }
 }
@@ -54,7 +54,7 @@ class ToDoList {
           todoItemElement.classList.remove("complete");
         }
       });
-      todoItemElement.classList.add(this.tasks[i].getTaskStatus());
+      todoItemElement.classList.add(this.tasks[i].getTaskPriority());
     }
   }
   deleteTask(index) {
