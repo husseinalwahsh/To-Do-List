@@ -23,7 +23,6 @@ class ToDoList {
     console.log(this.tasks);
     this.renderList();
     taskNameElement.value = "";
-    this.setTaskPriority();
   }
   renderList() {
     const tasksListElement = document.getElementById("tasksList");
