@@ -45,6 +45,7 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  padding: 6px;
 }
 
 .list ul li p {
@@ -125,4 +126,17 @@ select#priority:hover {
 select#priority:focus {
   box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
   border-color: #007bff;
+}
+.high {
+  background-color: rgba(255, 0, 0, 0.493);
+}
+.medium {
+  background-color: rgba(246, 255, 0, 0.795);
+}
+
+.low {
+  background-color: rgba(127, 230, 113, 0.264);
+}
+.complete{
+background-color: rgb(30, 255, 0);
 }
