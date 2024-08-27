@@ -41,7 +41,7 @@ class ToDoList {
     const newTask = new TaskItem(taskName, taskPriority);
 
     this.tasks.push(newTask);
-    this.saveTasksToLocalStorage();
+
     this.renderList();
     taskNameElement.value = "";
   }
@@ -70,7 +70,7 @@ class ToDoList {
         deleteTaskButton.onclick = () => {
           this.deleteTask(i);
         };
-        saveTaskButton.classList.add("displyButton");
+        saveTaskButton.classList.add("hideButton");
         todoItemElement.appendChild(taskNameItem);
         todoItemElement.appendChild(checkboxElement);
         divElement.appendChild(deleteTaskButton);
@@ -89,8 +89,8 @@ class ToDoList {
         });
 
         editTaskButton.onclick = () => {
-          editTaskButton.classList.add("displyButton");
-          saveTaskButton.classList.remove("displyButton");
+          editTaskButton.classList.add("hideButton");
+          saveTaskButton.classList.remove("hideButton");
           taskNameItem.contentEditable = "true";
           taskNameItem.focus();
         };
@@ -98,18 +98,19 @@ class ToDoList {
         saveTaskButton.addEventListener("click", () => {
           taskNameItem.contentEditable = "false";
           this.tasks[i].setNameTask(taskNameItem.textContent);
-          this.saveTasksToLocalStorage();
+
           this.renderList();
         });
 
         tasksListElement.appendChild(todoItemElement);
       }
     }
+    this.saveTasksToLocalStorage();
   }
 
   deleteTask(index) {
     this.tasks.splice(index, 1);
-    this.saveTasksToLocalStorage();
+    this.renderList();
   }
 
   saveTasksToLocalStorage() {
