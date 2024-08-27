@@ -11,8 +11,8 @@ class TaskItem {
   getTaskPriority() {
     return this.#taskPriority;
   }
-  setNameTask(taskName){
-    this.#taskName=taskName;
+  setNameTask(taskName) {
+    this.#taskName = taskName;
   }
 }
 
@@ -20,18 +20,11 @@ class ToDoList {
   constructor() {
     this.tasks = [];
     this.currentFilter = "all";
-    this.init();
   }
-  init() {
-    const filterSelectElement = document.getElementById("filterByPriority");
-    filterSelectElement.addEventListener("change", (event) => {
-      this.currentFilter = event.target.value;
-      this.renderList();
-    });
-  }
+
   addTask(taskName, taskPriority) {
     const newTask = new TaskItem(taskName, taskPriority);
-    // this.tasks.push(newTask);
+
     this.tasks.push(newTask);
 
     this.renderList();
@@ -40,11 +33,7 @@ class ToDoList {
   renderList() {
     const tasksListElement = document.getElementById("tasksList");
     tasksListElement.innerHTML = "";
-    // this.currentFilter === "all";
-    // ? this.tasks
-    // : this.tasks.filter(
-    //     (task) => task.getTaskPriority() === this.currentFilter,
-    //   );
+
     for (let i = 0; i < this.tasks.length; i++) {
       if (
         this.currentFilter === "all" ||
@@ -55,8 +44,10 @@ class ToDoList {
         const taskNameItem = document.createElement("p");
         const deleteTaskButton = document.createElement("button");
         const editTaskButton = document.createElement("button");
+        const saveTaskButton = document.createElement("button");
         const checkboxElement = document.createElement("input");
         taskNameItem.contenteditable = "true";
+        saveTaskButton.textContent = "Save";
         checkboxElement.type = "checkbox";
         deleteTaskButton.id = "delete";
         editTaskButton.textContent = "Edit";
@@ -64,9 +55,11 @@ class ToDoList {
         deleteTaskButton.onclick = () => {
           this.deleteTask(i);
         };
+        saveTaskButton.classList.add("r");
         todoItemElement.appendChild(taskNameItem);
         todoItemElement.appendChild(checkboxElement);
         divElement.appendChild(deleteTaskButton);
+        divElement.appendChild(saveTaskButton);
         divElement.appendChild(editTaskButton);
         todoItemElement.appendChild(divElement);
         taskNameItem.textContent = `${this.tasks[i].getNameTask()}`;
@@ -74,7 +67,7 @@ class ToDoList {
         tasksListElement.appendChild(todoItemElement);
         checkboxElement.addEventListener("change", (event) => {
           const todoItemElement = document.querySelectorAll("li")[i];
-          //  todoItemElement.style.textDecoration="underline";
+
           if (event.target.checked) {
             todoItemElement.classList.add("complete");
           } else {
@@ -83,17 +76,17 @@ class ToDoList {
         });
         todoItemElement.classList.add(this.tasks[i].getTaskPriority());
         editTaskButton.onclick = () => {
-          if (editTaskButton.textContent === "Edit") {
-            taskNameItem.contentEditable = "true";
-            taskNameItem.focus();
-            editTaskButton.textContent = "Save";
-          } else {
-            taskNameItem.contentEditable = "false";
-            this.tasks[i].setNameTask(taskNameItem.textContent);
-            editTaskButton.textContent = "Edit";
-            this.renderList();
-          }
+          editTaskButton.classList.add("r");
+          saveTaskButton.classList.remove("r");
+          taskNameItem.contentEditable = "true";
+          taskNameItem.focus();
         };
+
+        saveTaskButton.addEventListener("click", () => {
+          taskNameItem.contentEditable = "false";
+          this.tasks[i].setNameTask(taskNameItem.textContent);
+          this.renderList();
+        });
       }
     }
   }
@@ -109,7 +102,7 @@ const addListElement = document.getElementById("addList");
 const taskNameElement = document.getElementById("taskName");
 const taskPriorityElement = document.getElementById("priority");
 const toDoList = new ToDoList();
-
+const filterSelectElement = document.getElementById("filterByPriority");
 addListElement.onclick = () => {
   const taskName = taskNameElement.value;
   const taskPriority = taskPriorityElement.value;
@@ -119,3 +112,8 @@ addListElement.onclick = () => {
     alert("Please enter a task name.");
   }
 };
+
+filterSelectElement.addEventListener("change", (event) => {
+  toDoList.currentFilter = event.target.value;
+  toDoList.renderList();
+});
