@@ -85,8 +85,8 @@ body {
   align-items: center;
   margin: 10px 0;
 }
-li div button{
-  margin:0 2px;
+li div button {
+  margin: 0 2px;
 }
 
 .addTolist #taskName {
@@ -106,7 +106,8 @@ li div button{
   background-color: rgba(0, 0, 255, 0.819);
 }
 
-select#priority ,#filterByPriority{
+select#priority,
+#filterByPriority {
   width: 200px;
   padding: 10px;
   font-size: 16px;
@@ -140,10 +141,10 @@ select#priority:focus {
 .low {
   background-color: rgba(127, 230, 113, 0.264);
 }
-.complete{
-background-color: rgb(30, 255, 0);
+.complete {
+  background-color: rgb(30, 255, 0);
 }
-label{
+label {
   color: #fff;
   font-weight: 700;
   font-size: 24px;

@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "pretty": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "target": "es6",
+    "module": "commonjs",
+    "strict": false,
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
