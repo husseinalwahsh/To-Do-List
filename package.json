@@ -1,9 +1,45 @@
 {
+  "name": "typescript-project",
+  "version": "1.0.0",
+  "description": "A TypeScript project setup",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch",
+    "lint": "eslint 'src/**/*.ts'",
+    "prettier": "prettier --write 'src/**/*.ts'"
+  },
+  "dependencies": {},
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "eslint": "^9.9.0",
     "globals": "^15.9.0",
     "prettier": "^3.3.3",
-    "typescript-eslint": "^8.2.0"
+    "@typescript-eslint/eslint-plugin": "^8.2.0",
+    "@typescript-eslint/parser": "^8.2.0",
+    "typescript": "^5.2.0"
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "env": {
+      "es6": true,
+      "node": true
+    },
+    "rules": {}
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "tabWidth": 2,
+    "printWidth": 80
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }

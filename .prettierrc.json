@@ -2,7 +2,7 @@
   "semi": true,
   "overrides": [
     {
-      "files": ["*.html", "*.js", "*.css"],
+      "files": ["*.html", "*.js", "*.css","*.ts"],
       "options": {
         "tabWidth": 2
       },
