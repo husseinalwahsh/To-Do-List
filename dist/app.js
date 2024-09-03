@@ -1,10 +1,9 @@
-var Priority;
-(function (Priority) {
-    Priority["All"] = "all";
-    Priority["Low"] = "low";
-    Priority["Medium"] = "medium";
-    Priority["High"] = "high";
-})(Priority || (Priority = {}));
+var priorityType;
+(function (priorityType) {
+    priorityType["Low"] = "low";
+    priorityType["Medium"] = "medium";
+    priorityType["High"] = "high";
+})(priorityType || (priorityType = {}));
 class TaskItem {
     constructor(taskName, taskPriority, isTaskCompleted = false) {
         this.taskName = taskName;
@@ -30,7 +29,7 @@ class TaskItem {
 class ToDoList {
     constructor() {
         this.tasks = this.getTasksFromLocalStorage() || [];
-        this.currentFilter = Priority.All;
+        this.currentFilter = "all";
         this.renderList();
     }
     addTask(taskName, taskPriority) {
@@ -136,6 +135,7 @@ addListElement.onclick = () => {
     }
 };
 filterSelectElement.addEventListener("change", (event) => {
-    toDoList.currentFilter = event.target.value;
+    toDoList.currentFilter = event.target
+        .value;
     toDoList.renderList();
 });

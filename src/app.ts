@@ -1,19 +1,17 @@
-enum Priority {
-  All="all",
+enum priorityType {
   Low = "low",
   Medium = "medium",
-  High = "high"
+  High = "high",
 }
-
 
 class TaskItem {
   private taskName: string;
-  private taskPriority:Priority;
+  private taskPriority: priorityType;
   private isTaskCompleted: boolean;
 
   constructor(
     taskName: string,
-    taskPriority: Priority,
+    taskPriority: priorityType,
     isTaskCompleted: boolean = false,
   ) {
     this.taskName = taskName;
@@ -44,14 +42,14 @@ class TaskItem {
 
 class ToDoList {
   tasks: TaskItem[];
-  currentFilter: Priority;
+  currentFilter: priorityType | "all";
   constructor() {
     this.tasks = this.getTasksFromLocalStorage() || [];
-    this.currentFilter = Priority.All;
+    this.currentFilter = "all";
     this.renderList();
   }
 
-  addTask(taskName: string, taskPriority: Priority) {
+  addTask(taskName: string, taskPriority: priorityType) {
     const newTask = new TaskItem(taskName, taskPriority);
 
     this.tasks.push(newTask);
@@ -150,7 +148,7 @@ class ToDoList {
         return tasksArray.map(
           (task: {
             taskName: string;
-            taskPriority: Priority;
+            taskPriority: priorityType;
             isCompleted: boolean;
           }) =>
             new TaskItem(task.taskName, task.taskPriority, task.isCompleted),
@@ -176,7 +174,7 @@ const filterSelectElement = document.getElementById(
 
 addListElement.onclick = () => {
   const taskName = taskNameElement.value;
-  const taskPriority = taskPriorityElement.value as Priority;
+  const taskPriority = taskPriorityElement.value as priorityType;
   if (taskName !== "") {
     toDoList.addTask(taskName, taskPriority);
   } else {
@@ -185,6 +183,7 @@ addListElement.onclick = () => {
 };
 
 filterSelectElement.addEventListener("change", (event) => {
-  toDoList.currentFilter = (event.target as HTMLSelectElement).value as Priority;
+  toDoList.currentFilter = (event.target as HTMLSelectElement)
+    .value as priorityType;
   toDoList.renderList();
 });
