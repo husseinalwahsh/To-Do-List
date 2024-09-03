@@ -77,7 +77,7 @@ class ToDoList {
         const editTaskButton = document.createElement("button");
         const saveTaskButton = document.createElement("button");
         const checkboxElement = document.createElement("input");
-        taskNameItem.contentEditable = "false";
+
         saveTaskButton.textContent = "Save";
         checkboxElement.type = "checkbox";
         deleteTaskButton.id = "delete";
