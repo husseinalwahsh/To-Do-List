@@ -2,7 +2,6 @@
   "name": "typescript-project",
   "version": "1.0.0",
   "description": "A TypeScript project setup",
-  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",

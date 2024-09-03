@@ -1,4 +1,10 @@
-"use strict";
+var Priority;
+(function (Priority) {
+    Priority["All"] = "all";
+    Priority["Low"] = "low";
+    Priority["Medium"] = "medium";
+    Priority["High"] = "high";
+})(Priority || (Priority = {}));
 class TaskItem {
     constructor(taskName, taskPriority, isTaskCompleted = false) {
         this.taskName = taskName;
@@ -24,7 +30,7 @@ class TaskItem {
 class ToDoList {
     constructor() {
         this.tasks = this.getTasksFromLocalStorage() || [];
-        this.currentFilter = "all";
+        this.currentFilter = Priority.All;
         this.renderList();
     }
     addTask(taskName, taskPriority) {
@@ -46,7 +52,7 @@ class ToDoList {
                 const editTaskButton = document.createElement("button");
                 const saveTaskButton = document.createElement("button");
                 const checkboxElement = document.createElement("input");
-                taskNameItem.contentEditable = "true";
+                taskNameItem.contentEditable = "false";
                 saveTaskButton.textContent = "Save";
                 checkboxElement.type = "checkbox";
                 deleteTaskButton.id = "delete";
@@ -78,7 +84,7 @@ class ToDoList {
                     taskNameItem.focus();
                 };
                 saveTaskButton.addEventListener("click", () => {
-                    taskNameItem.contentEditable = "false";
+                    taskNameItem.contentEditable = "true";
                     this.tasks[i].setNameTask(taskNameItem.textContent);
                     this.renderList();
                 });

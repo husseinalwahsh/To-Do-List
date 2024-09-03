@@ -1,11 +1,19 @@
+enum Priority {
+  All="all",
+  Low = "low",
+  Medium = "medium",
+  High = "high"
+}
+
+
 class TaskItem {
-  private taskName: string | null;
-  private taskPriority: string;
+  private taskName: string;
+  private taskPriority:Priority;
   private isTaskCompleted: boolean;
 
   constructor(
     taskName: string,
-    taskPriority: string,
+    taskPriority: Priority,
     isTaskCompleted: boolean = false,
   ) {
     this.taskName = taskName;
@@ -25,7 +33,7 @@ class TaskItem {
     return this.isTaskCompleted;
   }
 
-  setNameTask(taskName: string | null): void {
+  setNameTask(taskName: string): void {
     this.taskName = taskName;
   }
 
@@ -36,14 +44,14 @@ class TaskItem {
 
 class ToDoList {
   tasks: TaskItem[];
-  currentFilter: string;
+  currentFilter: Priority;
   constructor() {
     this.tasks = this.getTasksFromLocalStorage() || [];
-    this.currentFilter = "all";
+    this.currentFilter = Priority.All;
     this.renderList();
   }
 
-  addTask(taskName: string, taskPriority: string) {
+  addTask(taskName: string, taskPriority: Priority) {
     const newTask = new TaskItem(taskName, taskPriority);
 
     this.tasks.push(newTask);
@@ -71,7 +79,7 @@ class ToDoList {
         const editTaskButton = document.createElement("button");
         const saveTaskButton = document.createElement("button");
         const checkboxElement = document.createElement("input");
-        taskNameItem.contentEditable = "true";
+        taskNameItem.contentEditable = "false";
         saveTaskButton.textContent = "Save";
         checkboxElement.type = "checkbox";
         deleteTaskButton.id = "delete";
@@ -106,7 +114,7 @@ class ToDoList {
         };
 
         saveTaskButton.addEventListener("click", () => {
-          taskNameItem.contentEditable = "false";
+          taskNameItem.contentEditable = "true";
           this.tasks[i].setNameTask(taskNameItem.textContent);
 
           this.renderList();
@@ -142,7 +150,7 @@ class ToDoList {
         return tasksArray.map(
           (task: {
             taskName: string;
-            taskPriority: string;
+            taskPriority: Priority;
             isCompleted: boolean;
           }) =>
             new TaskItem(task.taskName, task.taskPriority, task.isCompleted),
@@ -168,7 +176,7 @@ const filterSelectElement = document.getElementById(
 
 addListElement.onclick = () => {
   const taskName = taskNameElement.value;
-  const taskPriority = taskPriorityElement.value;
+  const taskPriority = taskPriorityElement.value as Priority;
   if (taskName !== "") {
     toDoList.addTask(taskName, taskPriority);
   } else {
@@ -177,6 +185,6 @@ addListElement.onclick = () => {
 };
 
 filterSelectElement.addEventListener("change", (event) => {
-  toDoList.currentFilter = (event.target as HTMLSelectElement).value;
+  toDoList.currentFilter = (event.target as HTMLSelectElement).value as Priority;
   toDoList.renderList();
 });
